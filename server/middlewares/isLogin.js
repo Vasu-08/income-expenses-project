@@ -1,14 +1,14 @@
-const { decode } = require("jsonwebtoken");
-const { appErr } = require("../utils/appErr");
-const getTokenFromHeader = require("../utils/getTokenFromHeader");
-const verifyToken = require("../utils/verifyToken");
+const {decode} = require('jsonwebtoken');
+const {appErr} = require('../utils/appErr');
+const getTokenFromHeader = require('../utils/getTokenFromHeader');
+const verifyToken = require('../utils/verifyToken');
 
 const isLogin = (req, res, next) => {
   const token = getTokenFromHeader(req);
   const decodedUser = verifyToken(token);
   req.user = decodedUser.id;
   if (!decodedUser) {
-    return next(appErr("Invalid token", 401));
+    return next(appErr('Invalid token', 401));
   }
   next();
 };

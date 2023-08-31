@@ -1,64 +1,50 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     transactionType: {
       type: String,
-      enum: ["Income", "Expenses"],
-      required: true,
+      enum: ['Income', 'Expenses'],
+      required: true
     },
 
     amount: {
       type: Number,
-      required: true,
+      required: true
     },
 
     category: {
       type: String,
-      enum: [
-        "Food",
-        "Transportation",
-        "Entertainment",
-        "Shopping",
-        "Utilities",
-        "Health",
-        "Travel",
-        "Education",
-        "Personal",
-        "Groceries",
-        "Bills",
-        "Uncategorized",
-        "Building",
-      ],
-      required: true,
+      enum: ['Food', 'Transportation', 'Entertainment', 'Shopping', 'Utilities', 'Health', 'Travel', 'Education', 'Personal', 'Groceries', 'Bills', 'Uncategorized', 'Building'],
+      required: true
     },
     color: {
-      type: String,
+      type: String
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User'
     },
     date: {
       type: Date,
-      default: Date.now(),
+      default: Date.now()
     },
     notes: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   {
     timestamps: true,
-    toJSON: { virtuals: true },
+    toJSON: {virtuals: true}
   }
 );
 
 //model
-const Transaction = mongoose.model("Transaction", transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
 module.exports = Transaction;

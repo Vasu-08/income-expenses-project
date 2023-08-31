@@ -4,4 +4,4 @@ const appErr = (message, statusCode) => {
   return error;
 };
 
-module.exports = { appErr };
+module.exports = {appErr};

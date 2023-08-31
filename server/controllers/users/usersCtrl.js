@@ -1,16 +1,16 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 // const verify = require("jsonwebtoken");
 
-const User = require("../../model/User");
-const { appErr } = require("../../utils/appErr");
-const generateToken = require("../../utils/generateToken");
+const User = require('../../model/User');
+const {appErr} = require('../../utils/appErr');
+const generateToken = require('../../utils/generateToken');
 //Register
 const registerUserCtrl = async (req, res, next) => {
-  const { fullname, password, email } = req.body;
+  const {fullname, password, email} = req.body;
   try {
     //check if email exist
-    const userFound = await User.findOne({ email });
-    if (userFound) return next(appErr("Email already exist", 400));
+    const userFound = await User.findOne({email});
+    if (userFound) return next(appErr('Email already exist', 400));
 
     //check if fields are empty
     // if (!email || !password || !fullname) {
@@ -24,13 +24,13 @@ const registerUserCtrl = async (req, res, next) => {
     const user = await User.create({
       fullname,
       email,
-      password: hashedPassword,
+      password: hashedPassword
     });
     res.json({
-      status: "success",
+      status: 'success',
       fullname: user.fullname,
       email: user.email,
-      id: user._id,
+      id: user._id
     });
   } catch (error) {
     return next(appErr(error.message, 500));
@@ -39,20 +39,20 @@ const registerUserCtrl = async (req, res, next) => {
 
 //login
 const userLoginCtrl = async (req, res, next) => {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
   try {
-    const userFound = await User.findOne({ email });
-    if (!userFound) return next(appErr("Invalid credentials", 400));
+    const userFound = await User.findOne({email});
+    if (!userFound) return next(appErr('Invalid credentials', 400));
 
     const passwordMatch = await bcrypt.compare(password, userFound.password);
 
-    if (!passwordMatch) return next(appErr("Invalid credentials", 400));
+    if (!passwordMatch) return next(appErr('Invalid credentials', 400));
 
     res.json({
-      status: "success",
+      status: 'success',
       id: userFound._id,
       user: userFound,
-      token: generateToken(userFound._id),
+      token: generateToken(userFound._id)
     });
   } catch (error) {
     return next(appErr(error.message, 500)); // do we need return here?
@@ -63,15 +63,15 @@ const userLoginCtrl = async (req, res, next) => {
 const userProfileCtrl = async (req, res, next) => {
   try {
     const user = await User.findById(req.user).populate({
-      path: "accounts",
+      path: 'accounts',
       populate: {
-        path: "transactions",
-        model: "Transaction",
-      },
+        path: 'transactions',
+        model: 'Transaction'
+      }
     });
     res.json({
-      status: "success",
-      data: user,
+      status: 'success',
+      data: user
     });
   } catch (error) {
     return next(appErr(error.message, 500));
@@ -83,8 +83,8 @@ const deleteUserCtrl = async (req, res, next) => {
   try {
     const userFound = await User.findByIdAndDelete(req.user);
     res.status(200).json({
-      status: "success",
-      data: null,
+      status: 'success',
+      data: null
     });
   } catch (error) {
     return next(appErr(error.message, 500));
@@ -95,8 +95,8 @@ const deleteUserCtrl = async (req, res, next) => {
 const updateUserCtrl = async (req, res, next) => {
   try {
     if (req.body.email) {
-      const userFound = await User.findOne({ email: req.body.email });
-      if (userFound) return nextErr("Email already exists", 400);
+      const userFound = await User.findOne({email: req.body.email});
+      if (userFound) return nextErr('Email already exists', 400);
     }
 
     if (req.body.password) {
@@ -105,19 +105,19 @@ const updateUserCtrl = async (req, res, next) => {
       const user = await User.findByIdAndUpdate(
         req.user,
         {
-          password: hashedPassword,
+          password: hashedPassword
         },
         {
-          new: true,
+          new: true
         }
       );
-      return res.status(200).json({ status: "Password Updated Successfully" });
+      return res.status(200).json({status: 'Password Updated Successfully'});
     }
     const user = await User.findByIdAndUpdate(req.user, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
-    res.status(200).json({ status: "success", data: user });
+    res.status(200).json({status: 'success', data: user});
   } catch (error) {
     res.json(error);
   }
@@ -129,5 +129,5 @@ module.exports = {
   userLoginCtrl,
   userProfileCtrl,
   deleteUserCtrl,
-  updateUserCtrl,
+  updateUserCtrl
 };
