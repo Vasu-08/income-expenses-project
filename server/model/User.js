@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    hasCreatedAccount: {
-      type: Boolean,
-      default: false
-    },
     accounts: [
       {
         type: mongoose.Schema.Types.ObjectId,

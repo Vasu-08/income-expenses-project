@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {accountContext} from '../context/AccountContext/AccountContext';
 
 export default function AddAccount() {
-  const {createAccountAction, error} = useContext(accountContext);
+  const {createAccountAction} = useContext(accountContext);
   const [formData, setFormData] = useState({
     name: '',
     initialBalance: '',
@@ -71,13 +71,14 @@ export default function AddAccount() {
                   <option value='Checking'>Checking</option>
                   <option value='Credit Card'>Credit Card</option>
                   <option value='Utilities'>Utilities</option>
-                  <option value='Builing'>Builing</option>
                   <option value='Travel'>Travel</option>
                   <option value='Education'>Education</option>
                   <option value='Personal'>Personal</option>
                   <option value='Groceries'>Groceries</option>
+                  <option value='School'>School</option>
                   <option value='Entertainment'>Entertainment</option>
                   <option value='Project'>Project</option>
+                  <option value='Loan'>Loan</option>
                   <option value='Uncategorized'>Uncategorized</option>
                 </select>
               </div>
@@ -97,7 +98,7 @@ export default function AddAccount() {
               <div>
                 <button
                   type='submit'
-                  // onSubmit={handleSubmit}
+                  onSubmit={handleSubmit}
                   className='flex w-full  justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                 >
                   Add New Account

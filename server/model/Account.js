@@ -8,7 +8,23 @@ const accountSchema = new mongoose.Schema(
     },
     accountType: {
       type: String,
-      enum: ['Savings', 'Investment', 'Checking', 'Credit Card', 'Builing', 'School', 'Project', 'Utilities', 'Travel', 'Personal', 'Groceries', 'Entertainment', 'Loan', 'Cash Flow', 'Uncategorized'],
+      enum: [
+        'Savings',
+        'Investment',
+        'Checking',
+        'Credit Card',
+        'Utilities',
+        'Travel',
+        'Education',
+        'Personal',
+        'Groceries',
+        'School',
+        'Entertainment',
+        'Project',
+        'Loan',
+        'Cash Flow',
+        'Uncategorized'
+      ],
       required: true
     },
 

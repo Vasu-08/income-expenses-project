@@ -22,10 +22,7 @@ export default function Navbar() {
                     {open ? <XMarkIcon className='block h-6 w-6' aria-hidden='true' /> : <Bars3Icon className='block h-6 w-6' aria-hidden='true' />}
                   </Disclosure.Button>
                 </div>
-                <div className='flex flex-shrink-0 items-center'>
-                  {/* <img className='block h-8 w-auto lg:hidden' src={logo} alt='i-novotek' />
-                  <img className='hidden h-8 w-auto lg:block' src={logo} alt='i-novotek' /> */}
-                </div>
+              
                 <div className='hidden md:ml-6 md:flex md:items-center md:space-x-4'>
                   <Link to='/' className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                     Home
@@ -61,7 +58,7 @@ export default function Navbar() {
                   </>
                 </div>
               </div>
-              {!token && (
+              {token && (
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
                     <Link

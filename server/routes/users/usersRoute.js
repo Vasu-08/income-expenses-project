@@ -27,4 +27,5 @@ usersRoute.delete('/', isLogin, deleteUserCtrl);
 
 //PUT/api/v1/users/:id
 usersRoute.put('/', isLogin, updateUserCtrl);
+
 module.exports = usersRoute;

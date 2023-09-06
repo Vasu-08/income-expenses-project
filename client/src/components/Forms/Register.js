@@ -84,8 +84,11 @@ const Register = () => {
               </button>
               <p className='text-center'>
                 <span className='text-xs font-medium'>
-                  Already have an account? <Link to='/login'>Sign in</Link>
+                  Already have an account? {' '}
                 </span>
+                <button className='inline-block text-xs font-medium text-green-500 hover:text-green-600 hover:underline' type='submit'>
+                  <Link to='/login'>Sign in</Link>
+                </button>
               </p>
             </form>
           </div>

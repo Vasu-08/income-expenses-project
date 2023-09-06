@@ -9,7 +9,7 @@ const AccountDashboard = () => {
   //dispatch action
   useEffect(() => {
     fetchProfileAction();
-  }, []);
+  });
   // console.log(profile.data.accounts);
   return (
     <>

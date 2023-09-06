@@ -26,6 +26,7 @@ const registerUserCtrl = async (req, res, next) => {
       email,
       password: hashedPassword
     });
+
     res.json({
       status: 'success',
       fullname: user.fullname,
@@ -55,7 +56,7 @@ const userLoginCtrl = async (req, res, next) => {
       token: generateToken(userFound._id)
     });
   } catch (error) {
-    return next(appErr(error.message, 500)); // do we need return here?
+    return next(appErr(error.message, 500));
   }
 };
 

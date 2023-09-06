@@ -1,5 +1,5 @@
 const express = require('express');
-const {createTransactionCtrl, getTransactionsCtrl, getTransactionCtrl, deleteTransactionCtrl, updateTransactionCtrl} = require('../../controllers/transactions/transactionCtrl');
+const {createTransactionCtrl, getAllTransactionsCtrl, getTransactionCtrl, deleteTransactionCtrl, updateTransactionCtrl} = require('../../controllers/transactions/transactionCtrl');
 const isLogin = require('../../middlewares/isLogin');
 
 const transactionsRoute = express.Router();
@@ -7,15 +7,15 @@ const transactionsRoute = express.Router();
 transactionsRoute.post('/', isLogin, createTransactionCtrl);
 
 //GET/api/v1/transactions
-transactionsRoute.get('/', getTransactionsCtrl);
+transactionsRoute.get('/accountTransactions/:id', isLogin, getAllTransactionsCtrl);
 
 //GET/api/v1/transactions/:id
-transactionsRoute.get('/:id', getTransactionCtrl);
+transactionsRoute.get('/:id', isLogin, getTransactionCtrl);
 
 //DELETE/api/v1/transactions/:id
-transactionsRoute.delete('/:id', getTransactionCtrl);
+transactionsRoute.delete('/:id', isLogin, deleteTransactionCtrl);
 
 //PUT/api/v1/transactions/:id
-transactionsRoute.put('/:id', updateTransactionCtrl);
+transactionsRoute.put('/:id', isLogin, updateTransactionCtrl);
 
 module.exports = transactionsRoute;

@@ -11,9 +11,9 @@ const AccountList = ({accounts}) => {
               <>
                 <p className='mb-4 text-xl font-medium text-coolGray-500'>No Accounts Found</p>
                 <p className='mb-4 text-lg text-coolGray-500'>You have not created any accounts yet. Click the button below to create one.</p>
-                <a href='/dashboard/accounts/create' className='px-6 py-3 text-lg font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700'>
+                <Link to='/dashboard/accounts/create' className='px-6 py-3 text-lg font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700'>
                   Create Account
-                </a>
+                </Link>
               </>
             ) : (
               <>
@@ -34,7 +34,7 @@ const AccountList = ({accounts}) => {
                 {accounts?.map(acc => {
                   return (
                     <>
-                      <a className='group block mb-6' href='#'>
+                      <Link className='group block mb-6' to={`/account-details/${acc?._id}`}>
                         <div className='flex items-center justify-between flex-wrap p-10 bg-coolGray-50 group-hover:bg-coolGray-100 rounded-md shadow-md transition duration-200'>
                           <div className='w-full md:w-1/2 mb-2 md:mb-0'>
                             <h3 className='text-lg md:text-xl text-coolGray-800 group-hover:text-coolGray-900 font-semibold'>{acc?.name}</h3>
@@ -53,7 +53,7 @@ const AccountList = ({accounts}) => {
                             </div>
                           </Link>
                         </div>
-                      </a>
+                      </Link>
                     </>
                   );
                 })}
